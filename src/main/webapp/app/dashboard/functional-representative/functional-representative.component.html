@@ -1,3 +1,76 @@
 <p>
   functional-representative works!
 </p>
+<div>
+    <h2 id="page-heading">
+        <span>Open Separation Applications</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" >
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Final Date</span></th>
+            <th><span>Submit Date</span></th>
+            <th><span>Completed Date</span></th>
+            <th><span>Reason For Leaving</span></th>
+            <th><span>Employee</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            	
+            	<tr *ngFor="let separationApplication of separationApplications ;trackBy: trackId">
+                
+                <td *ngIf="separationApplication.completedDate == null"><a [routerLink]="['/separation-application', separationApplication.id, 'view' ]">{{separationApplication.id}}</a></td>
+                <td *ngIf="separationApplication.completedDate == null">{{separationApplication.dateOfLeaving | date:'mediumDate'}}</td>
+                <td *ngIf="separationApplication.completedDate == null">{{separationApplication.dateOfSubmission | date:'medium'}}</td>
+                <td *ngIf="separationApplication.completedDate == null">{{separationApplication.completed | date:'mediumDate'}}</td>
+                <td *ngIf="separationApplication.completedDate == null">{{separationApplication.reasonForLeaving}}</td>
+                
+                <td *ngIf="separationApplication.completedDate == null">
+                    <div *ngIf="separationApplication.employee">
+                        <a [routerLink]="['../employee', separationApplication.employee?.id, 'view' ]" >{{separationApplication.employee.user.firstName.concat(' ', separationApplication.employee.user.lastName)}}</a>
+                    </div>
+                </td>
+                
+                
+                
+                
+                
+                
+                <td class="text-right" *ngIf="separationApplication.completedDate == null">
+                    
+                </td>
+            </tr>
+            
+            </tbody>
+        </table>
+    </div>
+    <h2 id="page-heading">
+        <span>Closed Separation Applications</span>
+    </h2>
+    <br/>
+    <div class="table-responsive" >
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Final Date</span></th>
+            <th><span>Submit Date</span></th>
+            <th><span>Completed Date</span></th>
+            <th><span>Reason For Leaving</span></th>
+            <th><span>Comments</span></th>
+            <th><span>Employee</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+        </table>
+    </div>
+</div>
+
