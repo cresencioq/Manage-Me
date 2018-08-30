@@ -1,78 +1,95 @@
 <div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-separation-application-heading">Create or edit a Separation Application</h2>
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!separationApplication.id">
-                    <label for="id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
+	<div class="col-8">
+		<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+			<h2 id="jhi-separation-application-heading">Create or edit a Separation Application</h2>
+			<div>
+				<jhi-alert-error></jhi-alert-error>
+				<div class="form-group" [hidden]="!separationApplication.id">
+					<label for="id">ID</label>
+					<input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="separationApplication.id" readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_dateOfLeaving">Date Of Leaving</label>
-                    <div class="d-flex">
-                        <input id="field_dateOfLeaving" type="datetime-local" class="form-control" name="dateOfLeaving" [(ngModel)]="dateOfLeaving"
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="field_dateOfLeaving">Date Of Leaving</label>
+					<div class="d-flex">
+						<input id="field_dateOfLeaving" type="datetime-local" class="form-control" name="dateOfLeaving" [(ngModel)]="dateOfLeaving"
                         required/>
-                    </div>
-                    <div [hidden]="!(editForm.controls.dateOfLeaving?.dirty && editForm.controls.dateOfLeaving?.invalid)">
-                        <small class="form-text text-danger"
+					</div>
+					<div [hidden]="!(editForm.controls.dateOfLeaving?.dirty && editForm.controls.dateOfLeaving?.invalid)">
+						<small class="form-text text-danger"
                         [hidden]="!editForm.controls.dateOfLeaving?.errors?.required">
                         This field is required.
                         </small>
-                        <small class="form-text text-danger"
+						<small class="form-text text-danger"
                             [hidden]="!editForm.controls.dateOfLeaving?.errors?.ZonedDateTimelocal">
                             This field should be a date and time.
                         </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_dateOfSubmission">Date Of Submission</label>
-                    <div class="d-flex">
-                        <input id="field_dateOfSubmission" type="datetime-local" class="form-control" name="dateOfSubmission" [(ngModel)]="dateOfSubmission" disabled
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="field_dateOfSubmission">Date Of Submission</label>
+					<div class="d-flex">
+						<input id="field_dateOfSubmission" type="datetime-local" class="form-control" name="dateOfSubmission" [(ngModel)]="dateOfSubmission" disabled
                         />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="field_reasonForLeaving">Reason For Leaving</label>
-                    <input type="text" class="form-control" name="reasonForLeaving" id="field_reasonForLeaving"
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="field_reasonForLeaving">Reason For Leaving</label>
+					<input type="text" class="form-control" name="reasonForLeaving" id="field_reasonForLeaving"
                         [(ngModel)]="separationApplication.reasonForLeaving" required/>
-                    <div [hidden]="!(editForm.controls.reasonForLeaving?.dirty && editForm.controls.reasonForLeaving?.invalid)">
-                        <small class="form-text text-danger"
+					<div [hidden]="!(editForm.controls.reasonForLeaving?.dirty && editForm.controls.reasonForLeaving?.invalid)">
+						<small class="form-text text-danger"
                         [hidden]="!editForm.controls.reasonForLeaving?.errors?.required">
                         This field is required.
                         </small>
-                    </div>
-                </div>            
-                
-                <div class="form-group">
-                    <label class="form-control-label" for="field_completed">Completed</label>
-                    <input type="checkbox" class="form-control" name="completed" id="field_completed"
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="field_completed">Completed</label>
+					<input type="checkbox" class="form-control" name="completed" id="field_completed"
                         [(ngModel)]="separationApplication.completed" />
-                </div>
-    
-                <div class="form-group">
-                    <label class="form-control-label" for="field_employee">Employee</label>
-                    <select class="form-control" id="field_employee" name="employee" [(ngModel)]="separationApplication.employee">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="employeeOption.id === separationApplication.employee?.id ? separationApplication.employee : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.id}}</option>
-                    </select>
-                </div>
-                <div *jhiHasAnyAuthority="'ROLE_FUNCTIONAL_REPRESENTATIVE'" class="form-group">
-                    <label class="form-control-label" for="field_lineItem">Line Item</label>
-                    <select class="form-control" id="field_lineItem" name="lineItem" [(ngModel)]="separationApplication.lineItem" >
-                        <option [ngValue]="null"></option>
-                    </select>
-                </div>
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
-                </button>
-            </div>
-        </form>
-    </div>
+				</div>
+				<div class="form-group">
+					<label class="form-control-label" for="field_employee">Employee</label>
+					<select class="form-control" id="field_employee" name="employee" [(ngModel)]="separationApplication.employee">
+						<option [ngValue]="null"></option>
+						<option [ngValue]="employeeOption.id === separationApplication.employee?.id ? separationApplication.employee : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.id}}</option>
+					</select>
+				</div>
+				<div *jhiHasAnyAuthority="'ROLE_FUNCTIONAL_REPRESENTATIVE'" class="form-group">
+					<label class="form-control-label" for="field_lineItem">Line Item</label>
+					<!-- <select class="form-control" id="field_lineItem" name="lineItem" [(ngModel)]="separationApplication.lineItem" ><option [ngValue]="null"></option></select>
+                     -->
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="enter line items" [(ngModel)]="lineItem" [ngModelOptions]="{standalone: true}" />
+						
+						
+						
+						
+						<div class="input-group-btn">
+							<button class="btn btn-primary" type="button" (click)="addLineItem()">
+								<span class="glyphicon glyphicon-ok"></span>Add Line Item
+          						
+							</button>
+						</div>
+					</div>
+					<ul class="list-group">
+						<li *ngFor="let lineItem of lineItems" class="list-group-item">
+							<span> {{ lineItem.feedback }} </span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div>
+				<button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+					<fa-icon [icon]="'ban'"></fa-icon>&nbsp;
+					<span>Cancel</span>
+				</button>
+				<button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+					<fa-icon [icon]="'save'"></fa-icon>&nbsp;
+					<span>Save</span>
+				</button>
+			</div>
+		</form>
+	</div>
 </div>

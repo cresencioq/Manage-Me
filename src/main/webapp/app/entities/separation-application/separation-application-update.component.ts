@@ -10,6 +10,7 @@ import { ISeparationApplication } from 'app/shared/model/separation-application.
 import { SeparationApplicationService } from './separation-application.service';
 import { IEmployee } from 'app/shared/model/employee.model';
 import { EmployeeService } from 'app/entities/employee';
+import { ILineItem } from 'app/shared/model/line-item.model';
 
 @Component({
     selector: 'jhi-separation-application-update',
@@ -22,6 +23,9 @@ export class SeparationApplicationUpdateComponent implements OnInit {
     employees: IEmployee[];
     dateOfLeaving: string;
     dateOfSubmission: string;
+
+    lineItem: string;
+    lineItems: ILineItem[] = [];
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -99,4 +103,9 @@ export class SeparationApplicationUpdateComponent implements OnInit {
         this.dateOfLeaving = moment(separationApplication.dateOfLeaving).format(DATE_TIME_FORMAT);
         this.dateOfSubmission = moment(separationApplication.dateOfSubmission).format(DATE_TIME_FORMAT);
     }
+
+    addLineItem() {
+        this.lineItems.push({ feedback: this.lineItem });
+        this.lineItem = '';
+      }
 }
