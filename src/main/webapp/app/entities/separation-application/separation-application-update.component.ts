@@ -107,5 +107,5 @@ export class SeparationApplicationUpdateComponent implements OnInit {
     addLineItem() {
         this.lineItems.push({ feedback: this.lineItem });
         this.lineItem = '';
-      }
+    }
 }
