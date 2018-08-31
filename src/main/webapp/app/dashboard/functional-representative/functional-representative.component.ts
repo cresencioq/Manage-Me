@@ -11,18 +11,19 @@ import { SeparationApplicationService } from 'app/entities/separation-applicatio
     templateUrl: './functional-representative.component.html',
     styles: []
 })
-
 export class FunctionalRepresentativeComponent implements OnInit, OnDestroy {
     separationApplications: ISeparationApplication[];
     currentAccount: any;
     eventSubscriber: Subscription;
+
     constructor(
         private separationApplicationService: SeparationApplicationService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal
     ) {}
-     loadAll() {
+
+    loadAll() {
         this.separationApplicationService.query().subscribe(
             (res: HttpResponse<ISeparationApplication[]>) => {
                 this.separationApplications = res.body;
@@ -30,23 +31,28 @@ export class FunctionalRepresentativeComponent implements OnInit, OnDestroy {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-     ngOnInit() {
+
+    ngOnInit() {
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInSeparationApplications();
     }
-     ngOnDestroy() {
+
+    ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
-     trackId(index: number, item: ISeparationApplication) {
+
+    trackId(index: number, item: ISeparationApplication) {
         return item.id;
     }
-     registerChangeInSeparationApplications() {
+
+    registerChangeInSeparationApplications() {
         this.eventSubscriber = this.eventManager.subscribe('separationApplicationListModification', response => this.loadAll());
     }
-     private onError(errorMessage: string) {
-         this.jhiAlertService.error(errorMessage, null, null);
-     }
- }
+
+    private onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
+}
