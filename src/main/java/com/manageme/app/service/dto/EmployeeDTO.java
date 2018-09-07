@@ -27,8 +27,18 @@ public class EmployeeDTO implements Serializable {
     private String name;
 
     private Set<String> authorities = new HashSet<>();
+    
+    private String login;
 
-    public Set<String> getAuthorities() {
+    public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public Set<String> getAuthorities() {
         return authorities;
     }
 

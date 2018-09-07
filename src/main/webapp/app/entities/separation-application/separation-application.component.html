@@ -7,7 +7,7 @@
             <i class="fas fa-plus"></i>
             <span>Create new Separation Application</span>
         </button>
-        <button class="btn btn-sm btn-outline-secondary" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+        <button class="btn btn-sm btn-outline-secondary" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_HUMAN_RESOURCES']" (click)="downloadFile()">
             <i class="far fa-file"></i>
             <span>Export CSV</span>
         </button>
